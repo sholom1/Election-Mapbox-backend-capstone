@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { Player } = require('../db/models');
+const { ElectionMap } = require('../db/models');
 
 // Express Routes for Players - Read more on routing at https://expressjs.com/en/guide/routing.html
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
 	try {
 		const allPlayers = await Player.findAll();
 		// An if/ternary statement to handle not finding allPlayers explicitly
