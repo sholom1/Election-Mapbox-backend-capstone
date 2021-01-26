@@ -3,6 +3,7 @@ const DistrictLayer = require('./districtlayer');
 const Candidate = require('./candidate');
 const ElectionMap = require('./electionmap');
 const District = require('./district');
+const ElectionData = require('./electiondata');
 
 //ASSOICATIONS GO HERE -- Read more at https://sequelize.org/master/manual/assocs.html
 DistrictLayer.hasMany(ElectionMap, { as: 'Maps' });
@@ -16,4 +17,5 @@ module.exports = {
 	DistrictLayer,
 	ElectionMap,
 	District,
+	ElectionData,
 };
