@@ -14,21 +14,18 @@ export const createCandidates = async (district) => {
 			votes: district[name],
 			color: getCandidateColor(name),
 		};
-		if (highestCandidate != undefined && candidate.votes > highestCandidate.votes){
+		if (highestCandidate != undefined && candidate.votes > highestCandidate.votes) {
 			highestCandidate = candidate;
 		}
 		records.push(candidate);
-
 	}
-
-
 	FinishedCandidates = await Candidate.bulkCreate(records);
 	let winnerid;
-	
-	for (let candidate in FinishedCandidates){
+
+	for (let candidate in FinishedCandidates) {
 		if (candidate.name == highestCandidate.name && candidate.votes == highestCandidate.votes)
-		winnerid = candidate.id;
+			winnerid = candidate.id;
 	}
 
-	return { FinishedCandidates, winnerid, highestCandidate};
+	return { FinishedCandidates, winnerid, highestCandidate };
 };

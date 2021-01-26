@@ -7,6 +7,10 @@ const ElectionMap = db.define('Election Map', {
 		allowNull: false,
 		isEmpty: false,
 	},
+	layers: {
+		type: Sequelize.JSONB,
+		allowNull: false,
+	},
 });
 
 module.exports = ElectionMap;
