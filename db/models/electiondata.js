@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const DistrictLayer = db.define('District Layer', {
+const ElectionData = db.define('Election Data', {
 	name: {
 		type: Sequelize.STRING,
 		allowNull: false,
@@ -12,4 +12,4 @@ const DistrictLayer = db.define('District Layer', {
 	},
 });
 
-module.exports = DistrictLayer;
+module.exports = ElectionData;
