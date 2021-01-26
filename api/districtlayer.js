@@ -24,17 +24,20 @@ router.post('/', (req, res, next) => {
 		.catch((err) => next(err));
 });
 
-router.delete('/', (req, res, next) =>{
-    DistrictLayer.findByPk(req.body.id).then
-    Layer.destroy();
-    ((Layer) => {
-        console.log(Layer);
-        res.json(Layer.name);
-    })
-    
-    .catch((err) => next(err))
+router.delete('/:id', (req, res, next) => {
+	DistrictLayer.findByPk(req.params.id)
+		.then((layer) => {
+			DistrictLayer.destroy({
+				where: {
+					id: req.params.id,
+				},
+			})
+				.then(() => {
+					res.json(layer);
+				})
+				.catch((err) => next(err));
+		})
+		.catch((err) => next(err));
 });
-
-
 
 module.exports = router;
