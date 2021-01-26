@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { DistrictLayer } = require('../db/models');
+const { DistrictLayer } = require('../../db/models');
 
 router.get('/', (req, res, next) => {
 	DistrictLayer.findAll()

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ElectionData } = require('../db/models');
+const { ElectionData } = require('../../db/models');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
 router.get('/', (req, res, next) => {
@@ -40,7 +40,6 @@ router.delete('/:id', (req, res, next) => {
 		})
 		.catch((err) => next(err));
 });
-
 
 // Export our router, so that it can be imported to construct our api routes
 module.exports = router;

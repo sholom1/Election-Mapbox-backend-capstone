@@ -1,6 +1,10 @@
 const xlsx = require('xlsx');
 
 class DistrictCandidateObject {
+	/**
+	 * Returns a new DistrictCandidateObject
+	 * @param {Array<xlsx.Sheet>} sheets
+	 */
 	constructor(sheets = []) {
 		//Iterate through the supplied sheets
 		for (let worksheet of sheets) {

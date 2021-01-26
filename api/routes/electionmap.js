@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ElectionMap } = require('../../db/models');
+const { ElectionMap, ElectionData, ColorData, DistrictLayer } = require('../../db/models');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
 router.get('/', (req, res, next) => {
@@ -27,6 +27,23 @@ router.post('/', (req, res, next) => {
     //Then we will call the rest of the LayerExpressions function and assign the array
     //to the map model
     */
+	ElectionData.findByPk(req.body.electionDataId)
+		.then((sheet) => {
+			DistrictLayer.findByPk(req.body.districtLayerId)
+				.then(async (layer) => {
+					let colorData = await ColorData.findByPk(req.body.colorDataId);
+				})
+				.catch((err) => {
+					res.status(404).send(
+						`The DistrictLayer with the primary key of ${req.body.electionDataId} could not be found`
+					);
+					next(err);
+				});
+		})
+		.catch((err) => {
+			res.status(404).send(`The sheet with the primary key of ${req.body.electionDataId} could not be found`);
+			next(err);
+		});
 	ElectionMap.create({
 		name: req.body.name,
 		data: req.body.data,
