@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { ElectionMap } = require('../db/models');
+const { ElectionMap } = require('../../db/models');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
 router.get('/', (req, res, next) => {

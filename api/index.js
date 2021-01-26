@@ -2,11 +2,11 @@ const router = require('express').Router();
 module.exports = router;
 
 // Mounts players api calls from api file on /api/players
-router.use('/players', require('./players'));
-router.use('/electiondata', require('./electiondata'));
-router.use('/colordata', require('./colordata'));
-router.use('/districtlayer', require('./districtlayer'));
-router.use('/electionmap', require('./electionmap'));
+router.use('/players', require('./routes/players'));
+router.use('/electiondata', require('./routes/electiondata'));
+router.use('/colordata', require('./routes/colordata'));
+router.use('/districtlayer', require('./routes/districtlayer'));
+router.use('/electionmap', require('./routes/electionmap'));
 
 //Anything not found gets a 404
 router.use((req, res, next) => {
