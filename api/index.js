@@ -5,7 +5,7 @@ module.exports = router;
 router.use('/players', require('./players'));
 router.use('/electiondata', require('./electiondata'));
 router.use('/colordata', require('./colordata'));
-router.use('/districtlayer', require('./districtlater'));
+router.use('/districtlayer', require('./districtlayer'));
 
 //Anything not found gets a 404
 router.use((req, res, next) => {
