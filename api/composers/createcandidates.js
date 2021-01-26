@@ -7,13 +7,28 @@ const { getCandidateColor } = require('./color');
  */
 export const createCandidates = async (district) => {
 	let records = [];
+	let highestCandidate;
 	for (let name in district) {
-		records.push({
+		let candidate = {
 			name,
 			votes: district[name],
 			color: getCandidateColor(name),
-		});
+		};
+		if (highestCandidate != undefined && candidate.votes > highestCandidate.votes){
+			highestCandidate = candidate;
+		}
+		records.push(candidate);
+
 	}
 
-	return await Candidate.bulkCreate(records);
+
+	FinishedCandidates = await Candidate.bulkCreate(records);
+	let winnerid;
+	
+	for (let candidate in FinishedCandidates){
+		if (candidate.name == highestCandidate.name && candidate.votes == highestCandidate.votes)
+		winnerid = candidate.id;
+	}
+
+	return { FinishedCandidates, winnerid, highestCandidate};
 };

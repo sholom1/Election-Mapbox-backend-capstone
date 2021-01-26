@@ -2,6 +2,11 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const District = db.define('district', {
+	districtnumber: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+	},
+	
 	totalvotes: {
 		type: Sequelize.STRING,
 		allowNull: false,
