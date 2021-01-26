@@ -15,8 +15,8 @@ router.get('/:id', (req, res, next) => {
 });
 router.post('/', (req, res, next) => {
 	ElectionData.create({
-		name: req?.body?.name,
-		data: req?.body?.data,
+		name: req.body.name,
+		data: req.body.data,
 	})
 		.then((sheet) => {
 			console.log(sheet);
