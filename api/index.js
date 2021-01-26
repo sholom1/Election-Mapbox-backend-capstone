@@ -6,6 +6,7 @@ router.use('/players', require('./players'));
 router.use('/electiondata', require('./electiondata'));
 router.use('/colordata', require('./colordata'));
 router.use('/districtlayer', require('./districtlayer'));
+router.use('/electionmap', require('./electionmap'));
 
 //Anything not found gets a 404
 router.use((req, res, next) => {
