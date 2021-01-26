@@ -32,7 +32,8 @@ class DistrictCandidateObject {
 			//range.e.r is the last row of the sheet
 			//The prefix is used to temporarily cache assembly district data
 			for (let row = range.s.r, prefix = {}; row < range.e.r; row++) {
-				let name = worksheet['C' + rowIndexAsString(row)].v;
+				let rowString = rowIndexAsString(row);
+				let name = worksheet['C' + rowString].v;
 				//Exit early if the name of this row is irrelevant
 				if (nameChanges.filter.includes(name)) {
 					continue;
@@ -43,23 +44,23 @@ class DistrictCandidateObject {
 				}
 				//column A contains the assembly district number
 				//if we are in a new assembly district then update the prefix object
-				if (prefix.number != worksheet['A' + rowIndexAsString(row)].v) {
+				if (prefix.number != worksheet['A' + rowString].v) {
 					prefix = {
-						number: worksheet['A' + rowIndexAsString(row)].v,
+						number: worksheet['A' + rowString].v,
 						color: getRandomColor(),
 					};
 				}
 				let districtNumber = joinDistrictNumbers(
 					prefix.number.toString(),
-					worksheet['B' + rowIndexAsString(row)].v.toString()
+					worksheet['B' + rowString].v.toString()
 				);
 				if (this[districtNumber] == undefined) {
 					this[districtNumber] = { 'Total Votes': 0 };
 				}
 				let results = this[districtNumber];
 				if (name != 'Total Votes') {
-					results[name] = worksheet['D' + rowIndexAsString(row)].v;
-					results['Total Votes'] += worksheet['D' + rowIndexAsString(row)].v;
+					results[name] = worksheet['D' + rowString].v;
+					results['Total Votes'] += worksheet['D' + rowString].v;
 				}
 			}
 		}

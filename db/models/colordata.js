@@ -11,3 +11,5 @@ const ColorData = db.define('Color Data', {
 		allowNull: false,
 	},
 });
+
+module.exports = ColorData;
