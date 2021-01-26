@@ -25,5 +25,21 @@ router.post('/', (req, res, next) => {
 		.catch((err) => next(err));
 });
 
+router.delete('/:id', (req, res, next) => {
+	ColorData.findByPk(req.params.id)
+		.then((colorData) => {
+			ColorData.destroy({
+				where: {
+					id: req.params.id,
+				},
+			})
+				.then(() => {
+					res.json(colorData);
+				})
+				.catch((err) => next(err));
+		})
+		.catch((err) => next(err));
+});
+
 // Export our router, so that it can be imported to construct our api routes
 module.exports = router;

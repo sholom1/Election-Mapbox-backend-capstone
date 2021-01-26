@@ -26,14 +26,14 @@ router.post('/', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
 	DistrictLayer.findByPk(req.params.id)
-		.then((layer) => {
+		.then((Layer) => {
 			DistrictLayer.destroy({
 				where: {
 					id: req.params.id,
 				},
 			})
 				.then(() => {
-					res.json(layer);
+					res.json(Layer);
 				})
 				.catch((err) => next(err));
 		})
