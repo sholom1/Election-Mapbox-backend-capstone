@@ -28,7 +28,7 @@ passport.deserializeUser(async (id, done) => {
 //CORS!
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 //Mount on API
 app.use('/api', require('./api'));
