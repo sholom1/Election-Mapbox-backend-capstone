@@ -14,13 +14,12 @@ router.get('/:id', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.post('/', (req, res, next) => {
-	ElectionData.create({
-		name: req.body.name,
-		data: req.body.data,
-	})
-		.then((sheet) => {
-			console.log(sheet);
-			res.json(sheet.name);
+	ElectionData.bulkCreate(
+		req.body.xlsxFiles
+	)
+		.then((xlsxData) => {
+			console.log(xlsxData);
+			res.json(xlsxData);
 		})
 		.catch((err) => next(err));
 });
