@@ -4,7 +4,11 @@ const { DistrictLayer } = require('../../db/models');
 
 router.get('/', (req, res, next) => {
 	DistrictLayer.findAll()
-		.then((Layer) => res.json(Layer))
+		.then((layers) => {
+			let data = [];
+			for (let layer of layers) data.push({ name: layer.name, id: layer.id });
+			res.json(data);
+		})
 		.catch((err) => next(err));
 });
 router.get('/:id', (req, res, next) => {
@@ -13,13 +17,14 @@ router.get('/:id', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.post('/', (req, res, next) => {
+	console.log(req.body);
 	DistrictLayer.create({
-		name: req.body.name,
-		data: req.body.data,
+		name: 'file',
+		data: req.body.districtLayers[0],
 	})
 		.then((Layer) => {
 			console.log(Layer);
-			res.json(Layer.name);
+			res.json({ name: Layer.name, id: Layer.id });
 		})
 		.catch((err) => next(err));
 });
