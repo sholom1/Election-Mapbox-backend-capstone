@@ -5,7 +5,7 @@ class LayerExpressions {
 		this.districtsInExpression = [];
 		this.colorExpression = ['match', ['get', 'elect_dist']];
 		this.opacityExpression = ['match', ['get', 'elect_dist']];
-		for (featureData of features) {
+		for (let featureData of features) {
 			let districtNumber = featureData.properties.elect_dist;
 			let opacity;
 			if (districtNumber == undefined) continue;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ElectionMap, ElectionData, ColorData, DistrictLayer } = require('../../db/models');
+const { generateMap } = require('../composers');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
 router.get('/', (req, res, next) => {
@@ -27,32 +28,26 @@ router.post('/', (req, res, next) => {
     //Then we will call the rest of the LayerExpressions function and assign the array
     //to the map model
     */
-	ElectionData.findByPk(req.body.electionDataId)
+	const { excelFile, layerFile, colorFile, name } = req.body;
+	ElectionData.findByPk(excelFile)
 		.then((sheet) => {
-			DistrictLayer.findByPk(req.body.districtLayerId)
+			if (!sheet) throw new Error('The sheet could not be found');
+			DistrictLayer.findByPk(layerFile)
 				.then(async (layer) => {
-					let colorData = await ColorData.findByPk(req.body.colorDataId);
+					const colorData = await ColorData.findByPk(colorFile);
+					const sheets = [sheet];
+					const createdMap = await generateMap(name, sheets, layer.dataValues.data, colorData);
+					res.json(createdMap);
 				})
 				.catch((err) => {
-					res.status(404).send(
-						`The DistrictLayer with the primary key of ${req.body.electionDataId} could not be found`
-					);
+					res.status(404).send(`The DistrictLayer with the primary key of ${layerFile} could not be found`);
 					next(err);
 				});
 		})
 		.catch((err) => {
-			res.status(404).send(`The sheet with the primary key of ${req.body.electionDataId} could not be found`);
+			res.status(404).send(`The sheet with the primary key of ${excelFile} could not be found`);
 			next(err);
 		});
-	ElectionMap.create({
-		name: req.body.name,
-		data: req.body.data,
-	})
-		.then((sheet) => {
-			console.log(sheet);
-			res.json(sheet.name);
-		})
-		.catch((err) => next(err));
 });
 
 // Export our router, so that it can be imported to construct our api routes

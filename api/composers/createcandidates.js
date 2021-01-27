@@ -5,7 +5,7 @@ const { getCandidateColor } = require('./color');
  *
  * @param {Object} district
  */
-export const createCandidates = async (district) => {
+const createCandidates = async (district) => {
 	let records = [];
 	let highestCandidate;
 	for (let name in district) {
@@ -29,3 +29,4 @@ export const createCandidates = async (district) => {
 
 	return { FinishedCandidates, winnerid, highestCandidate };
 };
+module.exports = createCandidates;

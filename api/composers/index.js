@@ -1,5 +1,5 @@
 const DistrictCandidateObject = require('./districtcandidateobject');
-const generateMap = require('./createmap');
+const generateMap = require('./generateMap');
 const LayerExpressions = require('./createlayerexpressions');
 const createDistricts = require('./createdistricts');
 const createCandidates = require('./createcandidates');

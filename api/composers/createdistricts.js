@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const { createCandidates } = require('./createcandidates');
 const { District, Candidate } = require('../../db/models');
 
-export const createDistricts = async (electionResults) => {
+const createDistricts = async (electionResults) => {
 	let districts = [];
 	for (let districtnumber in electionResults) {
 		let candidates = await createCandidates(electionResults[districtnumber]);
@@ -16,3 +16,4 @@ export const createDistricts = async (electionResults) => {
 	}
 	return await District.bulkCreate(districts);
 };
+module.exports = createDistricts;
