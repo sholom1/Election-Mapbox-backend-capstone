@@ -16,15 +16,27 @@ router.get('/:id', (req, res, next) => {
 		.then((Layer) => res.json(Layer))
 		.catch((err) => next(err));
 });
+
+// router.post('/', (req, res, next) => {
+// 	console.log(req.body);
+// 	DistrictLayer.create({
+// 		name: 'file',
+// 		data: req.body.districtLayers[0],
+// 	})
+// 		.then((Layer) => {
+// 			console.log(Layer);
+// 			res.json({ name: Layer.name, id: Layer.id });
+// 		})
+// 		.catch((err) => next(err));
+// });
+
 router.post('/', (req, res, next) => {
-	console.log(req.body);
-	DistrictLayer.create({
-		name: 'file',
-		data: req.body.districtLayers[0],
-	})
-		.then((Layer) => {
-			console.log(Layer);
-			res.json({ name: Layer.name, id: Layer.id });
+	DistrictLayer.bulkCreate(
+		req.body.districtLayers
+	)
+		.then((layer) => {
+			console.log(layer);
+			res.json(layer);
 		})
 		.catch((err) => next(err));
 });

@@ -14,13 +14,12 @@ router.get('/:id', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.post('/', (req, res, next) => {
-	ColorData.create({
-		name: req.body.name,
-		data: req.body.data,
-	})
+	ColorData.bulkCreate(
+		req.body.colorFiles
+	)
 		.then((colorData) => {
 			console.log(colorData);
-			res.json(colorData.name);
+			res.json(colorData);
 		})
 		.catch((err) => next(err));
 });
