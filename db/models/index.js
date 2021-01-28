@@ -6,6 +6,7 @@ const District = require('./district');
 const ElectionData = require('./electiondata');
 const ColorData = require('./colordata');
 const User = require('./user');
+const Category = require('./category');
 
 //ASSOICATIONS GO HERE -- Read more at https://sequelize.org/master/manual/assocs.html
 ElectionMap.belongsTo(DistrictLayer);
@@ -25,4 +26,5 @@ module.exports = {
 	ElectionData,
 	ColorData,
 	User,
+	Category,
 };

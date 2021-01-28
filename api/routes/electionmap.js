@@ -1,17 +1,44 @@
 const express = require('express');
 const router = express.Router();
-const { ElectionMap, ElectionData, ColorData, DistrictLayer } = require('../../db/models');
+const { ElectionMap, ElectionData, ColorData, DistrictLayer, Category } = require('../../db/models');
 const { generateMap } = require('../composers');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
-router.get('/', (req, res, next) => {
-	ElectionMap.findAll()
-		.then((sheets) => res.json(sheets))
+router.get('/categories', (req, res, next) => {
+	Category.findAll()
+		.then((categories) => res.json(categories))
+		.catch((err) => next(err));
+});
+router.get('/categories/:category', (req, res, next) => {
+	ElectionMap.findAll({
+		where: {
+			category: req.params.category,
+		},
+	})
+		.then((maps) => {
+			let result = [];
+			for (let map of maps) {
+				result.push({ name: map.name, id: map.id });
+			}
+			res.json(result);
+		})
+		.catch((err) => next(err));
+});
+router.post('/categories', (req, res, next) => {
+	Category.create({
+		name: req.body.name,
+	})
+		.then((category) => res.json(category))
 		.catch((err) => next(err));
 });
 router.get('/:id', (req, res, next) => {
 	ElectionMap.findByPk(req.params.id)
 		.then((sheet) => res.json(sheet))
+		.catch((err) => next(err));
+});
+router.get('/', (req, res, next) => {
+	ElectionMap.findAll()
+		.then((sheets) => res.json(sheets))
 		.catch((err) => next(err));
 });
 
