@@ -9,6 +9,7 @@ router.get('/categories', (req, res, next) => {
 		.then((categories) => res.json(categories))
 		.catch((err) => next(err));
 });
+
 router.get('/categories/:category', (req, res, next) => {
 	ElectionMap.findAll({
 		where: {
@@ -24,6 +25,7 @@ router.get('/categories/:category', (req, res, next) => {
 		})
 		.catch((err) => next(err));
 });
+
 router.post('/categories', (req, res, next) => {
 	Category.create({
 		name: req.body.category,
