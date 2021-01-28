@@ -18,21 +18,19 @@ const getRandomColor = () => {
  * @param {ColorData} colors
  * @returns {String}
  */
-const getCandidateColor = async (candidate, colors) => {
+const getCandidateColor = (candidate, colors) => {
 	//Exit early if the color is predetermined
 	if (candidate === 'Others') return '#000000';
 	if (candidate === 'Total Votes') return '#C0C0C0';
-	if (colors == undefined) {
-		colors = await ColorData.findAll()[0];
-	}
+
 	//TODO: implement options for tag handling
 	//Remove tag
 	let mCandidate = candidate.replace(/ *\([^)]*\) */g, '');
 	if (colors.candidates[mCandidate] == undefined) {
 		//TODO: Add default colors
-		ColorObject.candidates[mCandidate] = getRandomColor();
+		colors.candidates[mCandidate] = getRandomColor();
 	}
-	return ColorObject.candidates[mCandidate];
+	return colors.candidates[mCandidate];
 };
 module.exports = {
 	getCandidateColor,

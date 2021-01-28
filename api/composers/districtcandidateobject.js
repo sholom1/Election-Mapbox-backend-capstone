@@ -62,8 +62,10 @@ const DistrictCandidateObject = (sheets = []) => {
 				results[name] = worksheet['D' + rowString].v;
 				results['Total Votes'] += worksheet['D' + rowString].v;
 			}
+			districtcandidateobject[districtNumber] = results;
 		}
 	}
+	return districtcandidateobject;
 };
 /**
  * Increments the row by one and returns it as a string

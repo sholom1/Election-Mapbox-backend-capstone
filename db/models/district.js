@@ -6,14 +6,9 @@ const District = db.define('district', {
 		type: Sequelize.INTEGER,
 		allowNull: false,
 	},
-	
-	totalvotes: {
-		type: Sequelize.STRING,
-		allowNull: false,
-	},
 
-	winnerid: {
-		type: Sequelize.STRING,
+	totalvotes: {
+		type: Sequelize.INTEGER,
 		allowNull: false,
 	},
 

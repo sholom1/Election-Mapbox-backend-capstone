@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(morgan('tiny'));
 //Mount on API
 app.use('/api', require('./api'));
 app.use('/auth', auth);
@@ -49,7 +49,7 @@ const serverRun = () => {
 
 const syncDb = async () => {
 	try {
-		await db.sync({ force: true, alter: false });
+		await db.sync({ force: false, alter: true });
 	} catch (err) {
 		console.log(err);
 	}

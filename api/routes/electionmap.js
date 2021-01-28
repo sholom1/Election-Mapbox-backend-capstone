@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { ElectionMap, ElectionData, ColorData, DistrictLayer, Category } = require('../../db/models');
+const {
+	ElectionMap,
+	ElectionData,
+	ColorData,
+	DistrictLayer,
+	Category,
+	District,
+	Candidate,
+} = require('../../db/models');
 const { generateMap } = require('../composers');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
@@ -32,13 +40,29 @@ router.post('/categories', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.get('/:id', (req, res, next) => {
-	ElectionMap.findByPk(req.params.id)
-		.then((sheet) => res.json(sheet))
+	ElectionMap.findOne({
+		where: {
+			id: req.params.id,
+		},
+		include: [
+			{
+				model: District,
+				as: 'Districts',
+				include: [
+					{
+						model: Candidate,
+						as: 'Candidates',
+					},
+				],
+			},
+		],
+	})
+		.then((retrievedMap) => res.json(retrievedMap))
 		.catch((err) => next(err));
 });
 router.get('/', (req, res, next) => {
 	ElectionMap.findAll()
-		.then((sheets) => res.json(sheets))
+		.then((maps) => res.json(maps))
 		.catch((err) => next(err));
 });
 
@@ -63,7 +87,7 @@ router.post('/', (req, res, next) => {
 				.then(async (layer) => {
 					const colorData = await ColorData.findByPk(colorFile);
 					const sheets = [sheet];
-					const createdMap = await generateMap(name, sheets, layer.dataValues.data, colorData, category);
+					const createdMap = await generateMap(name, sheets, layer, colorData, category);
 					res.json(createdMap);
 				})
 				.catch((err) => {

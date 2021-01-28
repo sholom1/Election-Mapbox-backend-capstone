@@ -11,6 +11,10 @@ const ElectionMap = db.define('Election Map', {
 		type: Sequelize.JSONB,
 		allowNull: false,
 	},
+	// geoJson: {
+	// 	type: Sequelize.JSONB,
+	// 	allowNull: false,
+	// },
 	category: {
 		type: Sequelize.STRING,
 		allowNull: false,
