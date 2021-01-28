@@ -11,6 +11,11 @@ const ElectionMap = db.define('Election Map', {
 		type: Sequelize.JSONB,
 		allowNull: false,
 	},
+	category: {
+		type: Sequelize.STRING,
+		allowNull: false,
+		isEmpty: false,
+	},
 });
 
 module.exports = ElectionMap;

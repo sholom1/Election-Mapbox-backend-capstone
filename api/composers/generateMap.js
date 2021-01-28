@@ -4,7 +4,7 @@ const DistrictCandidateObject = require('./districtcandidateobject');
 const createDistricts = require('./createdistricts');
 const LayerExpressions = require('./createlayerexpressions');
 
-const generateMap = async (name, sheets, geojson, colordata) => {
+const generateMap = async (name, sheets, geojson, colordata, category) => {
 	//console.log(DistrictCandidateObject);
 	let results = DistrictCandidateObject(sheets); //new DistrictCandidateObject(sheets);
 	let districts = await createDistricts(results);
@@ -12,6 +12,7 @@ const generateMap = async (name, sheets, geojson, colordata) => {
 	ElectionMap.create({
 		name,
 		layers: { colorExpression, opacityExpression },
+		category,
 	}).then((result) => {
 		result.setDistricts(districts);
 	});

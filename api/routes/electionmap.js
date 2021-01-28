@@ -55,7 +55,7 @@ router.post('/', (req, res, next) => {
     //Then we will call the rest of the LayerExpressions function and assign the array
     //to the map model
     */
-	const { excelFile, layerFile, colorFile, name } = req.body;
+	const { excelFile, layerFile, colorFile, name, category } = req.body;
 	ElectionData.findByPk(excelFile)
 		.then((sheet) => {
 			if (!sheet) throw new Error('The sheet could not be found');
@@ -63,7 +63,7 @@ router.post('/', (req, res, next) => {
 				.then(async (layer) => {
 					const colorData = await ColorData.findByPk(colorFile);
 					const sheets = [sheet];
-					const createdMap = await generateMap(name, sheets, layer.dataValues.data, colorData);
+					const createdMap = await generateMap(name, sheets, layer.dataValues.data, colorData, category);
 					res.json(createdMap);
 				})
 				.catch((err) => {
