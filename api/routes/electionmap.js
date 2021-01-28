@@ -26,7 +26,7 @@ router.get('/categories/:category', (req, res, next) => {
 });
 router.post('/categories', (req, res, next) => {
 	Category.create({
-		name: req.body.name,
+		name: req.body.category,
 	})
 		.then((category) => res.json(category))
 		.catch((err) => next(err));
