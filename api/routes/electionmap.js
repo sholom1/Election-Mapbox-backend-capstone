@@ -42,24 +42,16 @@ router.post('/categories', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.get('/:id', (req, res, next) => {
+	console.log(req.params);
 	ElectionMap.findOne({
 		where: {
 			id: req.params.id,
 		},
-		include: [
-			{
-				model: District,
-				as: 'Districts',
-				include: [
-					{
-						model: Candidate,
-						as: 'Candidates',
-					},
-				],
-			},
-		],
 	})
-		.then((retrievedMap) => res.json(retrievedMap))
+		.then((retrievedMap) => {
+			console.log(retrievedMap);
+			res.json(retrievedMap);
+		})
 		.catch((err) => next(err));
 });
 router.get('/', (req, res, next) => {
