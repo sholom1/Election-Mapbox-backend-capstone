@@ -5,18 +5,29 @@ dotenv.config();
 
 // Initialize database with Sequelize
 
-const db = new Sequelize(name, process.env.DATABASE_USERNAME || 'postgress', process.env.DATABASE_PASSWORD, {
-	host: process.env.DATABASE_IP || 'localhost',
-	dialect: 'postgres',
-	port: process.env.DATABASE_PORT || 5432,
+// const db = new Sequelize(name, process.env.DATABASE_USERNAME || 'postgress', process.env.DATABASE_PASSWORD, {
+// 	host: process.env.DATABASE_IP || 'localhost',
+// 	dialect: 'postgres',
+// 	port: process.env.DATABASE_PORT || 5432,
 
-	pool: {
-		max: 5,
-		min: 0,
-		acquire: 30000,
-		idle: 10000,
-	},
-	logging: false,
+// 	pool: {
+// 		max: 5,
+// 		min: 0,
+// 		acquire: 30000,
+// 		idle: 10000,
+// 	},
+// 	logging: false,
+// });
+
+const db = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    dialectOptions: {
+        ssl: {
+            sslmode: 'require',
+            rejectUnauthorized: false
+        }
+    }
 });
 
 module.exports = db;
