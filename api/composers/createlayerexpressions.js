@@ -2,7 +2,7 @@ const { Candidate } = require('../../db/models');
 const { getCandidateColor } = require('./color');
 
 class LayerExpressions {
-	constructor(districts, features, colorData) {
+	constructor(districts, geoJSON, colorData) {
 		this.districtsInExpression = [];
 		this.colorExpression = ['get', 'color'];
 		this.opacityExpression = ['get', 'opacity'];
