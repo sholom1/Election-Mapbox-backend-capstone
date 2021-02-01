@@ -6,6 +6,8 @@ class LayerExpressions {
 		this.districtsInExpression = [];
 		this.colorExpression = ['get', 'color'];
 		this.opacityExpression = ['get', 'opacity'];
+		let features = geoJSON.features;
+		let districtsToRemove = [];
 		for (let featureData of features) {
 			let districtNumber = featureData.properties.elect_dist;
 			let opacity;
@@ -22,10 +24,12 @@ class LayerExpressions {
 					continue;
 				}
 			}
+			districtsToRemove.push(featureData);
 			featureData.properties.color = '#C0C0C0';
 			featureData.properties.opacity = '1';
 			this.districtsInExpression.push(districtNumber);
 		}
+		geoJSON.features = features.filter((element) => !districtsToRemove.includes(element.properties[districtKey]));
 	}
 }
 class NameBasedResults {
