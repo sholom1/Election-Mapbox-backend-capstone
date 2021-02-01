@@ -28,7 +28,7 @@ passport.deserializeUser(async (id, done) => {
 //CORS!
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: 'https://nycelectionmaps.netlify.app' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(morgan('tiny'));
