@@ -49,7 +49,7 @@ const serverRun = () => {
 
 const syncDb = async () => {
 	try {
-		await db.sync({ force: true, alter: false });
+		await db.sync({ force: false, alter: true });
 	} catch (err) {
 		console.log(err);
 	}
