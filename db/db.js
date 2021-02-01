@@ -30,12 +30,12 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 	protocol: 'postgres',
 	
 	//-----THIS SECTION MUST BE ENABLED WHEN RUNNING WITH HEROKU DATABASE, BUT DISABLED WHEN RUNNING WITH LOCAL DATABASE-------------
-    // dialectOptions: {
-    //     ssl: {
-    //         sslmode: 'require',
-    //         rejectUnauthorized: false
-	// 	}	
-	// }
+    dialectOptions: {
+        ssl: {
+            sslmode: 'require',
+            rejectUnauthorized: false
+		}	
+	}
 	//---------------------------------------------------------------------------------------
 });
 
