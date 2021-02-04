@@ -49,7 +49,8 @@ const serverRun = () => {
 
 const syncDb = async () => {
 	try {
-		await db.sync({ force: process.env.DATABASE_TOGGLE_FORCE, alter: !process.env.DATABASE_TOGGLE_FORCE });
+		let forceValue = process.env.DATABASE_TOGGLE_FORCE == 'true';
+		await db.sync({ force: forceValue, alter: !forceValue });
 	} catch (err) {
 		console.log(err);
 	}
