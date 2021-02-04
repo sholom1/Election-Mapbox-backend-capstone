@@ -24,13 +24,13 @@ const User = db.define('user', {
 		type: Sequelize.STRING,
 	},
 
-	Role: {
-		type: Sequelize.ENUM(['User', 'Admin']),
-		defaultValue: 'User',
-		get() {
-			return () => this.getDataValue('Role');
-		},
-	},
+	// Role: {
+	// 	type: Sequelize.ENUM(['User', 'Admin']),
+	// 	defaultValue: 'User',
+	// 	get() {
+	// 		return () => this.getDataValue('Role');
+	// 	},
+	// },
 });
 
 User.generateSalt = function () {
