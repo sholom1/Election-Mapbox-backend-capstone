@@ -29,7 +29,7 @@ class LayerExpressions {
 			featureData.properties.opacity = '1';
 			this.districtsInExpression.push(districtNumber);
 		}
-		geoJSON.features = features.filter((element) => !districtsToRemove.includes(element.properties[districtKey]));
+		geoJSON.features = features.filter((element) => !districtsToRemove.includes(element.properties.elect_dist));
 	}
 }
 class NameBasedResults {
