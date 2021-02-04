@@ -1,29 +1,29 @@
 {
-  "name": "electionmapbackend",
-  "version": "1.0.0",
-  "description": "Back End Template for TTP Bootcamp",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "seed": "node seed.js"
-  },
-  "author": "Depak Borhara",
-  "license": "ISC",
-  "dependencies": {
-    "auth": "0.0.9",
-    "compression": "^1.7.4",
-    "connect-session-sequelize": "^7.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "fs": "0.0.1-security",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.7",
-    "passport": "^0.4.1",
-    "pg": "^8.5.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^6.4.0",
-    "xlsx": "^0.16.9"
-  }
+	"name": "electionmapbackend",
+	"version": "1.0.0",
+	"description": "nycelectionmaps.com recreated using TTP tech stack",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"seed": "node seed.js"
+	},
+	"author": "Sam Kessler, Adina Scheinfeld",
+	"license": "ISC",
+	"dependencies": {
+		"auth": "0.0.9",
+		"compression": "^1.7.4",
+		"connect-session-sequelize": "^7.1.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"fs": "0.0.1-security",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.7",
+		"passport": "^0.4.1",
+		"pg": "^8.5.1",
+		"pg-hstore": "^2.3.3",
+		"sequelize": "^6.4.0",
+		"xlsx": "^0.16.9"
+	}
 }
