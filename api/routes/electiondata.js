@@ -4,7 +4,9 @@ const { ElectionData } = require('../../db/models');
 
 // Express Routes for election data files - Read more on routing at https://expressjs.com/en/guide/routing.html
 router.get('/', (req, res, next) => {
-	ElectionData.findAll()
+	ElectionData.findAll({
+		attributes: ['id', 'name'],
+	})
 		.then((sheets) => res.json(sheets))
 		.catch((err) => next(err));
 });
@@ -14,9 +16,7 @@ router.get('/:id', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.post('/', (req, res, next) => {
-	ElectionData.bulkCreate(
-		req.body.xlsxFiles
-	)
+	ElectionData.bulkCreate(req.body.xlsxFiles)
 		.then((xlsxData) => {
 			console.log(xlsxData);
 			res.json(xlsxData);
