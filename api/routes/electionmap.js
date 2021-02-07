@@ -49,7 +49,7 @@ router.get('/:id', (req, res, next) => {
 		},
 	})
 		.then((retrievedMap) => {
-			console.log(retrievedMap);
+			//console.log(retrievedMap);
 			res.json(retrievedMap);
 		})
 		.catch((err) => next(err));
