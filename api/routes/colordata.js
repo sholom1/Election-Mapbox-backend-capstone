@@ -4,7 +4,9 @@ const { ColorData } = require('../../db/models');
 
 // Express Routes for color data files - Read more on routing at https://expressjs.com/en/guide/routing.html
 router.get('/', (req, res, next) => {
-	ColorData.findAll()
+	ColorData.findAll({
+		attributes: ['id', 'name'],
+	})
 		.then((colorData) => res.json(colorData))
 		.catch((err) => next(err));
 });
@@ -14,9 +16,7 @@ router.get('/:id', (req, res, next) => {
 		.catch((err) => next(err));
 });
 router.post('/', (req, res, next) => {
-	ColorData.bulkCreate(
-		req.body.colorFiles
-	)
+	ColorData.bulkCreate(req.body.colorFiles)
 		.then((colorData) => {
 			console.log(colorData);
 			res.json(colorData);

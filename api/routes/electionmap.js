@@ -23,6 +23,7 @@ router.get('/categories/:category', (req, res, next) => {
 		where: {
 			category: req.params.category,
 		},
+		attributes: ['id', 'name'],
 	})
 		.then((maps) => {
 			let result = [];

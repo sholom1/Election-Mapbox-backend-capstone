@@ -3,7 +3,9 @@ const router = express.Router();
 const { DistrictLayer } = require('../../db/models');
 
 router.get('/', (req, res, next) => {
-	DistrictLayer.findAll()
+	DistrictLayer.findAll({
+		attributes: ['id', 'name'],
+	})
 		.then((layers) => {
 			let data = [];
 			for (let layer of layers) data.push({ name: layer.name, id: layer.id });
@@ -31,9 +33,7 @@ router.get('/:id', (req, res, next) => {
 // });
 
 router.post('/', (req, res, next) => {
-	DistrictLayer.bulkCreate(
-		req.body.districtLayers
-	)
+	DistrictLayer.bulkCreate(req.body.districtLayers)
 		.then((layer) => {
 			console.log(layer);
 			res.json(layer);
